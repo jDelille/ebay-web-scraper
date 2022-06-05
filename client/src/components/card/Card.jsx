@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators } from '../../state';
 import './Card.scss';
-const Card = ({ item, index, loading }) => {
+const Card = ({ item, index, loading, gridView }) => {
 
   // import favs counter from store
   const favs = useSelector((state) => state.favs);
@@ -30,7 +30,7 @@ const Card = ({ item, index, loading }) => {
   let hideImg = 'https://ir.ebaystatic.com/rs/v/fxxj3ttftm5ltcqnto1o4baovyl.png'
   if (image !== hideImg)
     return (
-      <div className='card' key={index}>
+      <div className={gridView ? 'grid-card' : 'list-card'} key={index}>
         {!loading ? (
           <>
             <div className='img'>
@@ -39,11 +39,12 @@ const Card = ({ item, index, loading }) => {
             <div className="info">
 
               <p className='title'>{title}</p>
+              <p className='condition'>{condition}</p>
               <p className="price">{price}</p>
               <p className="bids">{bids} {time}</p>
-              <p className='condition'>{condition}</p>
+
               <p className="shipping">{shippingCost}</p>
-              <button className="favorite" onClick={addFavorite}>Add Favorite</button>
+              {/* <button className="favorite" onClick={addFavorite}>Add Favorite</button> */}
             </div></>
         ) : (
           <h1> Loading... </h1>

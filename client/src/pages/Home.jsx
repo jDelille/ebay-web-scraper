@@ -6,15 +6,12 @@ import { useSelector } from 'react-redux';
 
 
 
-function Home() {
+function Home({ searchItem, setSearchItem, gridView }) {
   const [data, setData] = useState([]);
-  const [item, setItem] = useState('')
-  const [searchItem, setSearchItem] = useState('xbox')
   const [loading, setLoading] = useState(false)
 
   // import favs counter from store
   const favs = useSelector((state) => state.favs);
-
 
   useEffect(() => {
     setLoading(true)
@@ -38,55 +35,23 @@ function Home() {
     return item.title !== '' && arr.push(item);
   });
 
-  const handleChange = (e) => {
-    // covert user input to lowercase
-    let lowerCase = e.target.value.toLowerCase();
-    // replace spaces in input with "+"
-    let noSpaces = lowerCase.replace(/ /g, "+")
-    setItem(noSpaces)
-  }
-
-  // set the search item on click
-  const onClick = (e) => {
-    e.preventDefault();
-    console.log(item)
-    setSearchItem(item)
-  };
-
   // get favorites from local storage
   // fav counter, will have useEffect run each time it changes
-  const [fav, setFav] = useState(0)
   const [retrieved, setRetrieved] = useState([])
   useEffect(() => {
     setRetrieved(JSON.parse(localStorage.getItem('user-favorites')));
   }, [favs])
 
-
-  // remove favorite from local storage
-  function removeFavorite(index) {
-    setFav(fav - 1)
-    retrieved.splice(index, 1)
-    localStorage.setItem('user-favorites', JSON.stringify(retrieved))
-  }
-
-  // have search bar animate to the navbar on scroll 
-
-
   return (
     <div className="home">
-      <div className="search-container">
-        <p> Search for any item and see what its being sold for</p>
-        <div className="input">
-          <input type="text" onChange={handleChange} />
-          <button onClick={onClick}>Search</button>
-        </div>
+      <div className={gridView ? "grid-card-container" : 'list-card-container'} >
+        {
+          arr.map((item, index) => {
+            return <Card item={item} index={index} key={index} gridView={gridView} />;
+          })
+        }
       </div>
-      <div className="card-container">
-        {arr.map((item, index) => {
-          return <Card item={item} index={index} key={index} setFav={setFav} fav={fav} />;
-        })}
-      </div>
-    </div>
+    </div >
   )
 
 }

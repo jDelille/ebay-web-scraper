@@ -1,4 +1,25 @@
 :root {
 	--accent: #6795de;
 	--padding: 0 18rem;
+	--grid: repeat(4, 1fr);
+}
+
+@media (max-width: 1700px) {
+	:root {
+		--padding: 0rem 10rem;
+	}
+}
+
+@media (max-width: 1400px) {
+	:root {
+		--padding: 0rem 11rem;
+		--grid: repeat(3, 1fr);
+	}
+}
+
+@media (max-width: 900px) {
+	:root {
+		--padding: 0rem 1rem;
+		--grid: repeat(1, 1fr);
+	}
 }

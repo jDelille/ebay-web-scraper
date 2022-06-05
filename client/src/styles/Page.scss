@@ -2,39 +2,21 @@
 @import '../styles/variables.scss';
 
 .home {
-	.search-container {
-		height: 20vh;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		position: fixed;
-		top: 65px;
-		width: 100vw;
-		z-index: 9998;
-		p {
-			margin: 1rem 0;
-		}
-		.input {
-			display: flex;
-			align-items: center;
-			height: 40px;
-			position: relative;
-			gap: 1rem;
-			input {
-				@include input();
-			}
-			button {
-				@include button();
-			}
-		}
-	}
-	.card-container {
-		display: flex;
-		flex-direction: column;
-		gap: 1rem;
-		margin-top: 2rem;
+	padding: var(--padding);
+	position: relative;
+	.grid-card-container {
+		width: 100%;
+		display: grid;
+		grid-template-columns: var(--grid);
+		justify-items: center;
 		position: relative;
-		top: 26vh;
+		top: calc(20vh + 85px);
+		gap: 0.25rem;
+	}
+	.list-card-container {
+		position: relative;
+		top: calc(20vh + 85px);
+		display: flex;
+		flex-direction: column;
 	}
 }

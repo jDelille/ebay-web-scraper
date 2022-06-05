@@ -24,7 +24,8 @@ export const GlobalStyles = createGlobalStyle`
   background-color: ${(props) => props.theme.background};
   color: ${(props) => props.theme.font};
  }
-	.card,
+	.grid-card,
+	.list-card,
 	.search-container,
 	.favorite-card
 	 {

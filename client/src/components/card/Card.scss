@@ -1,12 +1,13 @@
 @import '../../styles/mixins.scss';
 
-.card {
-	@include card();
+.grid-card {
+	@include grid-card();
 	.img {
-		width: 25%;
+		width: 100%;
 		height: 100%;
 		display: flex;
 		align-items: center;
+		justify-content: center;
 		img {
 			max-width: 100%;
 		}
@@ -17,13 +18,17 @@
 		width: 85%;
 		align-items: flex-start;
 		height: 100%;
-		gap: 1rem;
 		button {
 			@include button();
+			margin-top: 8px;
 		}
 		.title {
 			text-align: left;
 			font-size: 1.2rem;
+		}
+		.condition {
+			padding-top: 8px;
+			padding-bottom: 2rem;
 		}
 		.price {
 			font-weight: bold;
@@ -31,6 +36,14 @@
 		}
 		.bids {
 			font-size: 1.2rem;
+			padding-top: 8px;
+		}
+		.shipping {
+			padding-top: 8px;
 		}
 	}
+}
+
+.list-card {
+	@include list-card();
 }
