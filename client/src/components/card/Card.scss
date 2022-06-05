@@ -1,0 +1,36 @@
+@import '../../styles/mixins.scss';
+
+.card {
+	@include card();
+	.img {
+		width: 25%;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		img {
+			max-width: 100%;
+		}
+	}
+	.info {
+		display: flex;
+		flex-direction: column;
+		width: 85%;
+		align-items: flex-start;
+		height: 100%;
+		gap: 1rem;
+		button {
+			@include button();
+		}
+		.title {
+			text-align: left;
+			font-size: 1.2rem;
+		}
+		.price {
+			font-weight: bold;
+			font-size: 1.4rem;
+		}
+		.bids {
+			font-size: 1.2rem;
+		}
+	}
+}
