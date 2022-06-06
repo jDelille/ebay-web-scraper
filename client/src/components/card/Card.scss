@@ -5,16 +5,13 @@
 	.img {
 		width: 100%;
 		height: 100%;
-		display: flex;
-		align-items: center;
-		justify-content: center;
+		@include flexCenter();
 		img {
 			max-width: 100%;
 		}
 	}
 	.info {
-		display: flex;
-		flex-direction: column;
+		@include flexColumn();
 		width: 85%;
 		align-items: flex-start;
 		height: 100%;
@@ -22,28 +19,48 @@
 			@include button();
 			margin-top: 8px;
 		}
-		.title {
-			text-align: left;
-			font-size: 1.2rem;
-		}
-		.condition {
-			padding-top: 8px;
-			padding-bottom: 2rem;
-		}
-		.price {
-			font-weight: bold;
-			font-size: 1.4rem;
-		}
-		.bids {
-			font-size: 1.2rem;
-			padding-top: 8px;
-		}
-		.shipping {
-			padding-top: 8px;
+		@include cardText();
+		.favorited,
+		.favorite {
+			font-size: 1.5rem;
+			position: absolute;
+			right: 1rem;
+			bottom: 1rem;
 		}
 	}
 }
 
 .list-card {
 	@include list-card();
+	.img {
+		min-width: 30%;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		img {
+			max-width: 100%;
+		}
+	}
+	@include cardText();
+	.favorited,
+	.favorite {
+		font-size: 1.5rem;
+		position: absolute;
+		right: 1rem;
+		top: 1rem;
+	}
+}
+
+@include phone() {
+	.list-card {
+		width: 100%;
+		left: 0;
+		.favorite,
+		.favorited {
+			top: unset;
+			bottom: 1rem;
+		}
+		@include cardText();
+	}
 }

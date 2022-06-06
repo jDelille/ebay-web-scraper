@@ -7,3 +7,13 @@ export const updateFavorites = (amount) => {
 		});
 	};
 };
+
+// set max bid
+export const setMaxBid = (amount) => {
+	return (dispatch) => {
+		dispatch({
+			type: 'maxBid',
+			payload: amount,
+		});
+	};
+};

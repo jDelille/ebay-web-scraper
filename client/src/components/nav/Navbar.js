@@ -4,9 +4,11 @@ import { bindActionCreators } from 'redux';
 import { actionCreators } from '../../state';
 import { CgDarkMode } from 'react-icons/cg';
 import { BsGrid3X3GapFill } from 'react-icons/bs';
+import { AiOutlineSearch } from 'react-icons/ai';
 import { MdFavorite } from 'react-icons/md';
 import './Navbar.scss';
 import Favorites from '../favorites/Favorites';
+import MobileSearchBar from './MobileSearchBar';
 
 const Navbar = ({ setTheme, theme, setSearchItem, setGridView, gridView }) => {
 	// favorites dropdown state
@@ -16,6 +18,8 @@ const Navbar = ({ setTheme, theme, setSearchItem, setGridView, gridView }) => {
 
 	// import favs counter from store
 	const favs = useSelector((state) => state.favs);
+	// import maxBid
+	const maxBid = useSelector((state) => state.maxBid);
 
 	// import dispatch
 	const dispatch = useDispatch();
@@ -55,27 +59,56 @@ const Navbar = ({ setTheme, theme, setSearchItem, setGridView, gridView }) => {
 		if (window.pageYOffset > 0) {
 			document.querySelector('#input').classList.add('scrolled');
 			document.querySelector('#input').classList.remove('scrolled-2');
+			document.querySelector('.categories').classList.add('hide');
+			document.querySelector('.max-bid').classList.remove('invisible');
 		} else {
 			document.querySelector('#input').classList.add('scrolled-2');
 			document.querySelector('#input').classList.remove('scrolled');
+			document.querySelector('.categories').classList.remove('hide');
+			document.querySelector('.max-bid').classList.add('invisible');
 		}
 	};
 
 	return (
 		<nav>
-			<div className='logo'> Ebay Scraper </div>
+			<div className='logo'> Sellable </div>
 			<div className='links'>
+				<MobileSearchBar
+					handleChange={handleChange}
+					onClick={onClick}
+					retrieved={retrieved}
+					removeFavorite={removeFavorite}
+				/>
 				<div className='input' id='input'>
-					<input type='text' onChange={handleChange} />
-					<button onClick={onClick}>Search</button>
+					<div className='input-box'>
+						<form>
+							<input
+								type='text'
+								onChange={handleChange}
+								placeholder='Search for an item...'
+							/>
+							<button type='submit' onClick={onClick}>
+								<AiOutlineSearch />
+							</button>
+						</form>
+					</div>
 				</div>
 			</div>
-
 			<div className='user-controls'>
 				<BsGrid3X3GapFill
 					onClick={() => setGridView(!gridView)}
 					className='toggle-view'
 				/>
+				<CgDarkMode onClick={() => setTheme(!theme)} />
+				<MdFavorite onClick={() => setExpand(!expand)} />
+				{/* favorites dropdown */}
+				<Favorites
+					retrieved={retrieved}
+					expand={expand}
+					removeFavorite={removeFavorite}
+				/>
+			</div>
+			<div className='m-user-controls'>
 				<CgDarkMode onClick={() => setTheme(!theme)} />
 				<MdFavorite onClick={() => setExpand(!expand)} />
 				{/* favorites dropdown */}

@@ -1,9 +1,9 @@
 import React from 'react';
+import { AiOutlineClose } from 'react-icons/ai';
 import './Favorites.scss';
 const Favorites = ({ expand, retrieved, removeFavorite }) => {
 	return (
 		<div className={expand ? 'favorites' : 'hide'}>
-			Favorites
 			{retrieved?.map((item, index) => {
 				return (
 					<div className='favorite-card'>
@@ -15,9 +15,15 @@ const Favorites = ({ expand, retrieved, removeFavorite }) => {
 							<div className='price'>
 								<p>{item.price}</p>
 							</div>
+							<div className='bids'>
+								<p>{item.bids}</p>
+							</div>
 						</div>
 						<div className='remove'>
-							<p onClick={() => removeFavorite(index)}> X </p>
+							<AiOutlineClose
+								className='remove-icon'
+								onClick={() => removeFavorite(index)}
+							/>
 						</div>
 					</div>
 				);

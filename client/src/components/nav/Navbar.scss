@@ -1,5 +1,8 @@
+@import '../../styles/mixins.scss';
+
 nav {
-	width: 100%;
+	width: 100vw;
+	max-width: 100%;
 	height: 65px;
 	display: flex;
 	align-items: center;
@@ -7,46 +10,168 @@ nav {
 	top: 0;
 	z-index: 9999;
 	padding: var(--padding);
-	.links {
-		width: 100%;
+	.logo {
+		width: 25%;
+		height: 100%;
 		display: flex;
 		align-items: center;
-		justify-content: center;
+	}
+	.links {
+		width: 100%;
+		@include flexCenter();
 		position: relative;
-		input {
-			width: 50vw;
-			height: 50px;
+		.input {
+			@include flexColumn();
 			position: relative;
-			transition: all 400ms ease-in-out;
+			top: 100px;
+			width: 100%;
+			.input-box {
+				display: flex;
+				form {
+					display: flex;
+					border-radius: 5px;
+					width: 100%;
+					margin: 0 auto;
+					button {
+						width: 15%;
+						cursor: pointer;
+						background-color: transparent;
+						@include flexCenter();
+						font-size: 1.2rem;
+						color: var(--accent);
+					}
+					input {
+						width: 100%;
+						height: 50px;
+						position: relative;
+						padding: 1rem;
+						font-size: 1.2rem;
+						transition: all 200ms ease-in-out;
+						margin: 0 auto;
+					}
+				}
+			}
+		}
+
+		.mobile-input {
+			display: none;
+		}
+		.hide {
+			display: none;
 		}
 		.scrolled {
-			transform: translate(0px, 0px);
-			transition: all 400ms ease-in-out;
+			transform: translateY(-100px);
+			transition: all 200ms ease-in-out;
 			display: flex;
+			width: 80%;
 
 			input {
-				width: 30vw;
+				width: 100%;
 				height: 40px;
+				padding: 1rem;
+				outline: none;
 			}
 		}
 		.scrolled-2 {
-			transform: translate(0px, 100px);
-			transition: all 400ms ease-in-out;
+			transform: translateY(0px);
 			display: flex;
 			width: 100%;
 			justify-content: center;
+			transition: all 200ms ease-in-out;
 		}
+	}
+	.popularity,
+	.max-bid {
+		display: flex;
+		width: 25%;
+		justify-content: flex-end;
+		margin-left: auto;
+		height: 100%;
+		align-items: center;
+	}
+	.invisible {
+		opacity: 0;
 	}
 	.user-controls {
 		margin-left: auto;
 		display: flex;
 		gap: 1rem;
 		align-items: center;
-		width: auto;
+		width: 25%;
 		height: 100%;
 		font-size: 1.2rem;
+		justify-content: flex-end;
+	}
+	.m-user-controls {
+		display: none;
 	}
 	.hide {
 		display: none;
+	}
+}
+
+@include phone() {
+	nav {
+		width: 100%;
+		.logo {
+			width: 35%;
+		}
+		.links {
+			width: 100%;
+			padding: 0;
+			display: flex;
+			justify-content: space-between;
+
+			.mobile-input {
+				display: flex;
+				width: 100%;
+
+				form {
+					display: flex;
+					height: 100%;
+					align-items: center;
+					padding: 0;
+					input {
+						width: 100%;
+						height: 40px;
+						padding: 1rem;
+					}
+					button {
+						background-color: transparent;
+						height: 100%;
+						display: flex;
+						align-items: center;
+						padding-right: 1rem;
+						color: var(--accent);
+						font-size: 1.2rem;
+					}
+				}
+			}
+			.input {
+				display: none;
+			}
+			.categories {
+				display: none;
+			}
+			.scrolled {
+				width: 100%;
+			}
+		}
+
+		.user-controls,
+		.max-bid,
+		.popularity {
+			display: none;
+		}
+
+		.m-user-controls {
+			width: 30%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 1.2rem;
+			height: 100%;
+			gap: 1rem;
+		}
 	}
 }

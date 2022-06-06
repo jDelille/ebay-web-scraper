@@ -21,11 +21,11 @@
 }
 
 @mixin input {
-	border: 1px solid rgb(143, 143, 143);
 	width: 100%;
 	padding: 1rem;
 	font-size: 1.2rem;
 	height: 100%;
+	border: none;
 }
 
 @mixin button {
@@ -37,5 +37,44 @@
 	&:hover {
 		background-color: #779edd;
 		transition: all 200ms ease-in-out;
+	}
+}
+
+@mixin cardText() {
+	.condition,
+	.bids,
+	.shipping {
+		padding-top: 8px;
+	}
+	.title {
+		text-align: left;
+		font-size: 1.2rem;
+	}
+	.condition {
+		padding-bottom: 2rem;
+	}
+	.price {
+		font-weight: bold;
+		font-size: 1.4rem;
+	}
+	.bids {
+		font-size: 1.2rem;
+	}
+}
+
+@mixin flexCenter {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+@mixin flexColumn {
+	display: flex;
+	flex-direction: column;
+}
+
+@mixin phone {
+	@media only screen and (max-width: 856px) {
+		@content;
 	}
 }

@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators } from '../../state';
+import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import './Card.scss';
-const Card = ({ item, index, loading, gridView }) => {
+const Card = ({ item, index, loading, gridView, currentFavs }) => {
 
   // import favs counter from store
   const favs = useSelector((state) => state.favs);
@@ -24,10 +25,12 @@ const Card = ({ item, index, loading, gridView }) => {
     localStorage.setItem('user-favorites', JSON.stringify([...favoritesData, item]))
   }
 
+  // destructure item obj
   const { title, image, price, bids, time, condition, shippingCost } = item
 
   // don't show this image
   let hideImg = 'https://ir.ebaystatic.com/rs/v/fxxj3ttftm5ltcqnto1o4baovyl.png'
+
   if (image !== hideImg)
     return (
       <div className={gridView ? 'grid-card' : 'list-card'} key={index}>
@@ -37,15 +40,18 @@ const Card = ({ item, index, loading, gridView }) => {
               <img src={image} alt='' />
             </div>
             <div className="info">
-
               <p className='title'>{title}</p>
               <p className='condition'>{condition}</p>
               <p className="price">{price}</p>
               <p className="bids">{bids} {time}</p>
-
               <p className="shipping">{shippingCost}</p>
-              {/* <button className="favorite" onClick={addFavorite}>Add Favorite</button> */}
-            </div></>
+              {currentFavs?.includes(title) ? (
+                <AiFillHeart className="favorited" />
+              ) : (
+                <AiOutlineHeart className="favorite" onClick={addFavorite} />
+              )}
+            </div>
+          </>
         ) : (
           <h1> Loading... </h1>
         )}
